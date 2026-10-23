@@ -1,0 +1,22 @@
+{
+  "experiment": "Milvus FLAT exact search vs HNSW approximate search",
+  "flat_collection": "semantic_docs_flat",
+  "hnsw_collection": "semantic_docs_hnsw",
+  "queries_count": 10,
+  "repetitions_per_query": 10,
+  "k": 10,
+  "category_filter": "sci.space",
+  "mean_embedding_latency_ms": 687.499,
+  "flat_latency_mean_ms": 8.8101,
+  "flat_latency_median_ms": 8.288,
+  "flat_latency_p95_ms": 13.3395,
+  "hnsw_latency_mean_ms": 6.4418,
+  "hnsw_latency_median_ms": 5.9987,
+  "hnsw_latency_p95_ms": 9.6406,
+  "mean_recall_at_k": 1.0,
+  "flat_queries_per_second": 113.5067,
+  "hnsw_queries_per_second": 155.2366,
+  "hnsw_speedup_vs_flat": 1.3676,
+  "raw_csv": "results\\benchmark_sci_space.csv",
+  "notes": "Latency measures the Milvus search call only; embedding latency is reported separately. Results depend on hardware, collection state, and server configuration."
+}

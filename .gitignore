@@ -1,0 +1,23 @@
+.venv/
+__pycache__/
+*.py[cod]
+.env
+.env.*
+!.env.example
+.pytest_cache/
+.mypy_cache/
+.idea/
+.vscode/
+# Local Milvus, etcd and MinIO database storage
+volumes/
+# Python virtual environments
+.venv/
+venv/
+env/
+
+# Local database storage
+volumes/
+
+# Large packaged copy of the project
+review3_source.zip
+dump/semantic_docs.json

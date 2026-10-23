@@ -1,0 +1,11 @@
+﻿query_index,query,category_filter,k,repetitions,embedding_latency_ms,flat_latency_median_ms,flat_latency_mean_ms,flat_latency_p95_ms,hnsw_latency_median_ms,hnsw_latency_mean_ms,hnsw_latency_p95_ms,recall_at_k_mean,recall_at_k_min,flat_queries_per_second,hnsw_queries_per_second
+1,computer graphics rendering and image processing,sci.space,10,10,6640.7261,11.0842,11.6595,16.7523,8.178,8.2556,11.9284,1.0,1.0,85.767,121.1295
+2,space exploration and NASA missions,sci.space,10,10,28.818,9.8554,10.2624,13.6192,7.2374,7.5079,9.7038,1.0,1.0,97.4434,133.1939
+3,motorcycle maintenance and repair,sci.space,10,10,23.9237,7.9579,9.2602,15.6146,5.9164,6.025,6.6595,1.0,1.0,107.9891,165.9748
+4,medical treatment and health conditions,sci.space,10,10,23.0102,8.0748,8.0024,9.023,5.7795,5.9646,7.0257,1.0,1.0,124.9627,167.6553
+5,baseball teams and season statistics,sci.space,10,10,25.7269,8.5045,8.2389,9.084,5.9653,5.988,6.8144,1.0,1.0,121.3757,167.0015
+6,computer hardware components and upgrades,sci.space,10,10,24.376,7.4404,7.6402,9.8444,5.9623,5.7961,6.8065,1.0,1.0,130.8865,172.5307
+7,cryptography and secure communication,sci.space,10,10,23.7781,7.8237,7.6669,8.598,5.6307,5.803,7.4401,1.0,1.0,130.4301,172.3238
+8,car engines and automobile performance,sci.space,10,10,34.4946,7.7742,8.557,11.8751,5.9208,6.1418,7.5284,1.0,1.0,116.8638,162.819
+9,religious beliefs and Christian theology,sci.space,10,10,26.2149,8.2381,9.1022,11.83,6.7195,7.5543,11.7402,1.0,1.0,109.8637,132.3758
+10,electronic circuits and electrical components,sci.space,10,10,23.9212,7.7008,7.7109,9.4337,5.4633,5.3816,6.1191,1.0,1.0,129.6862,185.8194

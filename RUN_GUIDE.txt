@@ -1,0 +1,172 @@
+VECTOR DATABASE FOR SEMANTIC SEARCH — REVIEW 2 RUN GUIDE
+=========================================================
+
+WHAT YOU NEED
+-------------
+1. Docker Desktop (Windows) or Docker Engine + Docker Compose (Linux/WSL2).
+2. Python 3.10 or 3.11 recommended.
+3. Internet on the first run to download the 20 Newsgroups dataset and embedding model.
+4. Keep at least 8 GB RAM available if possible.
+
+WHERE TO RUN COMMANDS
+---------------------
+Extract the ZIP to a normal folder, e.g.
+  Windows: C:\Users\<you>\Documents\VectorDB_SemanticSearch_Review2
+  Linux/WSL: ~/projects/VectorDB_SemanticSearch_Review2
+
+Open VS Code:
+  File > Open Folder > choose the extracted project folder.
+Open Terminal > New Terminal. All commands below should be run from that project root
+(the folder containing requirements.txt, docker-compose.yml, app/, scripts/ and static/).
+
+STEP 1 — START MILVUS
+---------------------
+Ensure Docker Desktop is open and running. In the VS Code terminal:
+
+  docker compose up -d
+  docker compose ps
+
+Wait until the Milvus standalone service is running. The app connects to localhost:19530.
+If Docker reports a port conflict, stop the service already using port 19530.
+
+STEP 2 — CREATE PYTHON ENVIRONMENT
+----------------------------------
+Windows PowerShell:
+  py -3.11 -m venv .venv
+  .\.venv\Scripts\Activate.ps1
+  python -m pip install --upgrade pip
+  pip install -r requirements.txt
+
+If PowerShell blocks activation, run this only for the current terminal:
+  Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+Then activate again.
+
+Linux / WSL2 / macOS:
+  python3 -m venv .venv
+  source .venv/bin/activate
+  python -m pip install --upgrade pip
+  pip install -r requirements.txt
+
+Use the same activated environment for every Python command.
+
+STEP 3 — PREPARE THE SAMPLE DATASET
+-----------------------------------
+  python scripts/prepare_dataset.py --limit 10000
+
+Expected terminal information includes the output CSV path, row count, category count
+and a preview of the first few records. The generated file is data/semantic_docs.csv.
+The exact retained row count may be slightly lower if very short/empty posts are skipped.
+
+STEP 4 — CREATE COLLECTIONS AND INGEST VECTORS
+----------------------------------------------
+  python scripts/ingest.py --csv data/semantic_docs.csv --drop-existing
+
+This creates/recreates:
+  semantic_docs_hnsw — HNSW approximate nearest-neighbour index
+  semantic_docs_flat — FLAT exact-search baseline
+
+Each record stores id, text_content, source_title, category, created_at, token_count,
+and a 384-dimensional embedding from all-MiniLM-L6-v2. The first model use can take
+some time because the model is downloaded and cached.
+
+Expected progress:
+  Collections ready in ...
+  Ingested .../...
+  Ingestion complete.
+  HNSW collection: semantic_docs_hnsw
+  Exact collection: semantic_docs_flat
+  Documents per collection: ...
+
+Do not use --drop-existing if you need to preserve data already stored in these collections.
+
+STEP 5 — DEMONSTRATE CRUD
+-------------------------
+  python scripts/crud_demo.py
+
+The script creates a temporary document, reads it, updates its text and embedding,
+deletes it, and checks that it is gone. Expected labels: CREATE, READ, UPDATE, DELETE.
+
+STEP 6 — START THE WEB API
+--------------------------
+  uvicorn app.main:app --reload
+
+Keep this terminal open. In a browser, visit:
+  http://127.0.0.1:8000/       browser search interface
+  http://127.0.0.1:8000/docs   interactive Swagger API documentation
+  http://127.0.0.1:8000/health database connectivity check
+
+If the app fails to start, check that Milvus is running and that the terminal is in
+the project root with the virtual environment activated.
+
+STEP 7 — DEMO THE SEARCH API
+----------------------------
+In Swagger UI at /docs, open POST /search and use:
+
+{
+  "query": "space exploration and NASA missions",
+  "top_k": 5,
+  "category": null
+}
+
+Then try a filtered query:
+
+{
+  "query": "space exploration and NASA missions",
+  "top_k": 5,
+  "category": "sci.space"
+}
+
+Try POST /search/exact to demonstrate the FLAT baseline. Results contain ID, score,
+text, source and category. Similarity scores and result ordering depend on the corpus
+and model; do not hardcode or claim fixed results.
+
+STEP 8 — SHOW CRUD ENDPOINTS
+----------------------------
+Use Swagger UI:
+  POST   /documents
+  GET    /documents/{doc_id}
+  PUT    /documents/{doc_id}
+  DELETE /documents/{doc_id}
+
+For POST /documents, provide a unique integer ID and text_content, for example:
+
+{
+  "id": 900001,
+  "text_content": "Semantic search retrieves documents by meaning rather than exact keywords.",
+  "source_title": "Review Demo",
+  "category": "demo",
+  "created_at": 0
+}
+
+After creating it, GET the same ID, update it using PUT with the same ID, then DELETE it.
+
+STEP 9 — EXPORT THE DATABASE DUMP
+---------------------------------
+Open a second terminal in the same project root and activate the same virtual environment.
+Run:
+
+  python scripts/export_dump.py --collection semantic_docs_hnsw --output dump/semantic_docs.json
+
+The JSON file is the export artifact for the review. Check that dump/semantic_docs.json exists
+and is non-empty before submitting.
+
+REVIEW 2 SUBMISSION CHECKLIST
+-----------------------------
+[ ] Docker/Milvus running
+[ ] Dataset CSV generated
+[ ] Both collections created and populated
+[ ] HNSW and FLAT index configuration shown
+[ ] CRUD demo completed
+[ ] API /docs shown
+[ ] Semantic query demonstrated
+[ ] Category-filtered query demonstrated
+[ ] Database JSON dump exported
+[ ] Source code and README included
+
+PERFORMANCE RESULTS
+-------------------
+Review 2's rubric focuses on database implementation and a working prototype. The benchmark
+script is included for later use, but final latency, Recall@K, memory and scalability results
+belong in Review 3. Do not invent numbers. When Review 3 arrives, run:
+  python scripts/benchmark.py --k 10 --repetitions 3
+  python scripts/benchmark.py --k 10 --repetitions 3 --filtered

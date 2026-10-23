@@ -1,0 +1,121 @@
+{
+  "experiment": "Scalability: FLAT vs HNSW across corpus sizes",
+  "dataset": "data\\semantic_docs.csv",
+  "usable_dataset_rows": 10000,
+  "sizes": [
+    1000,
+    2500,
+    5000,
+    10000
+  ],
+  "k": 10,
+  "repetitions_per_query": 5,
+  "hnsw_query_ef": 64,
+  "results": [
+    {
+      "corpus_size": 1000,
+      "index_type": "FLAT",
+      "k": 10,
+      "queries_count": 10,
+      "repetitions_per_query": 5,
+      "hnsw_ef": "",
+      "mean_latency_ms": 4.8635,
+      "median_latency_ms": 4.5853,
+      "p95_latency_ms": 8.3204,
+      "throughput_qps": 205.6137,
+      "mean_recall_at_k": 1.0
+    },
+    {
+      "corpus_size": 1000,
+      "index_type": "HNSW",
+      "k": 10,
+      "queries_count": 10,
+      "repetitions_per_query": 5,
+      "hnsw_ef": 64,
+      "mean_latency_ms": 5.1753,
+      "median_latency_ms": 4.7625,
+      "p95_latency_ms": 7.0385,
+      "throughput_qps": 193.2239,
+      "mean_recall_at_k": 1.0
+    },
+    {
+      "corpus_size": 2500,
+      "index_type": "FLAT",
+      "k": 10,
+      "queries_count": 10,
+      "repetitions_per_query": 5,
+      "hnsw_ef": "",
+      "mean_latency_ms": 7.538,
+      "median_latency_ms": 7.0259,
+      "p95_latency_ms": 11.1325,
+      "throughput_qps": 132.6618,
+      "mean_recall_at_k": 1.0
+    },
+    {
+      "corpus_size": 2500,
+      "index_type": "HNSW",
+      "k": 10,
+      "queries_count": 10,
+      "repetitions_per_query": 5,
+      "hnsw_ef": 64,
+      "mean_latency_ms": 7.3557,
+      "median_latency_ms": 7.4061,
+      "p95_latency_ms": 8.635,
+      "throughput_qps": 135.9487,
+      "mean_recall_at_k": 1.0
+    },
+    {
+      "corpus_size": 5000,
+      "index_type": "FLAT",
+      "k": 10,
+      "queries_count": 10,
+      "repetitions_per_query": 5,
+      "hnsw_ef": "",
+      "mean_latency_ms": 10.8412,
+      "median_latency_ms": 10.3433,
+      "p95_latency_ms": 12.8353,
+      "throughput_qps": 92.2408,
+      "mean_recall_at_k": 1.0
+    },
+    {
+      "corpus_size": 5000,
+      "index_type": "HNSW",
+      "k": 10,
+      "queries_count": 10,
+      "repetitions_per_query": 5,
+      "hnsw_ef": 64,
+      "mean_latency_ms": 10.0704,
+      "median_latency_ms": 9.8678,
+      "p95_latency_ms": 12.0777,
+      "throughput_qps": 99.3013,
+      "mean_recall_at_k": 1.0
+    },
+    {
+      "corpus_size": 10000,
+      "index_type": "FLAT",
+      "k": 10,
+      "queries_count": 10,
+      "repetitions_per_query": 5,
+      "hnsw_ef": "",
+      "mean_latency_ms": 38.9106,
+      "median_latency_ms": 38.3117,
+      "p95_latency_ms": 75.681,
+      "throughput_qps": 25.6999,
+      "mean_recall_at_k": 1.0
+    },
+    {
+      "corpus_size": 10000,
+      "index_type": "HNSW",
+      "k": 10,
+      "queries_count": 10,
+      "repetitions_per_query": 5,
+      "hnsw_ef": 64,
+      "mean_latency_ms": 7.3894,
+      "median_latency_ms": 7.5231,
+      "p95_latency_ms": 8.6536,
+      "throughput_qps": 135.3292,
+      "mean_recall_at_k": 0.98
+    }
+  ],
+  "notes": "Temporary collections only; original project collections are not modified. Search latency excludes embedding."
+}

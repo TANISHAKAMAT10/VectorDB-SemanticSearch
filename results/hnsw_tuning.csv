@@ -1,0 +1,6 @@
+﻿ef,k,queries_count,repetitions_per_query,category_filter,flat_mean_latency_ms,flat_median_latency_ms,flat_p95_latency_ms,hnsw_mean_latency_ms,hnsw_median_latency_ms,hnsw_p95_latency_ms,mean_recall_at_k,min_recall_at_k,hnsw_queries_per_second,speedup_vs_flat
+16,10,10,10,,8.7382,8.2167,11.3441,4.6039,4.3815,5.9652,0.94,0.7,217.2069,1.898
+32,10,10,10,,7.8644,7.7799,8.9828,4.2634,4.2177,4.9408,0.99,0.9,234.5533,1.8446
+64,10,10,10,,8.2063,7.8667,9.6759,4.4593,4.4509,5.3705,1.0,1.0,224.2529,1.8403
+128,10,10,10,,8.0202,7.9457,9.3015,4.7929,4.6389,5.8557,1.0,1.0,208.6441,1.6734
+200,10,10,10,,9.1277,8.4496,15.0164,5.4684,5.0038,8.6695,1.0,1.0,182.868,1.6692

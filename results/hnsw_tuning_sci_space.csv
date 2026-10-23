@@ -1,0 +1,6 @@
+﻿ef,k,queries_count,repetitions_per_query,category_filter,flat_mean_latency_ms,flat_median_latency_ms,flat_p95_latency_ms,hnsw_mean_latency_ms,hnsw_median_latency_ms,hnsw_p95_latency_ms,mean_recall_at_k,min_recall_at_k,hnsw_queries_per_second,speedup_vs_flat
+16,10,10,10,sci.space,8.2,6.8469,15.7869,5.6021,4.7089,10.5917,1.0,1.0,178.5037,1.4637
+32,10,10,10,sci.space,6.9537,6.2676,11.7392,4.6847,4.1663,8.0703,1.0,1.0,213.4624,1.4844
+64,10,10,10,sci.space,6.4998,6.2747,7.5637,4.407,4.2403,5.5089,1.0,1.0,226.9125,1.4749
+128,10,10,10,sci.space,6.8491,6.5431,9.162,4.4522,4.3088,5.7676,1.0,1.0,224.6059,1.5383
+200,10,10,10,sci.space,6.7105,6.5654,8.0615,4.4388,4.4242,5.587,1.0,1.0,225.2881,1.5118

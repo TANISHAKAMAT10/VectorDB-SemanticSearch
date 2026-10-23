@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Semantic Search Prototype</title></head>
+<body>
+<h1>Vector Database Semantic Search</h1>
+<p>Milvus + Sentence-Transformers + HNSW</p>
+<input id="q" size="70" placeholder="e.g. space exploration and NASA missions">
+<button onclick="search()">Search</button>
+<pre id="out"></pre>
+<script>
+async function search() {
+  const query = document.getElementById('q').value;
+  const res = await fetch('/search', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({query, top_k:10})});
+  document.getElementById('out').textContent = JSON.stringify(await res.json(), null, 2);
+}
+</script>
+</body></html>
